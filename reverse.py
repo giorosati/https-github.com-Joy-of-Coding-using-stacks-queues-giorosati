@@ -1,7 +1,8 @@
 # MODIFY ME TO IMPLEMENT YOUR SOLUTION
 # TO PROBLEM 1: REVERSE QUEUE
 #
-# NAME:         FIXME
+# NAME:         Giovanni Rosati
+# DATE:         2024-03-14
 # ASSIGNMENT:   Project 2: Stacks & Queues
 
 from Queue import Queue

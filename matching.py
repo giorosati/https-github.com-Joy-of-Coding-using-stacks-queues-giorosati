@@ -1,7 +1,8 @@
 # MODIFY ME TO IMPLEMENT YOUR SOLUTION
 # TO PROBLEM 2: BRACE MATCHER
 #
-# NAME:         FIXME
+# NAME:         Giovanni Rosati
+# DATE:         2024-03-14
 # ASSIGNMENT:   Project 2: Stacks & Queues
 
 from Stack import Stack

@@ -10,9 +10,47 @@ from Stack import Stack
 # Returns True if the braces match,
 # & False otherwise
 def matcher(str):
-    s = Stack([])
-    # FIXME
-    return True
+    s_paren = Stack([])  #stack for ()
+    s_braces = Stack([]) # stack for []
+    s_curly = Stack([])  # stack for {}
+    s_last_open = Stack([])  # stack to track order of open side elements
+    
+    for element in str:
+        if element == "(":
+            s_paren.push(element)
+            s_last_open.push(element)
+
+        elif element == "[": 
+            s_braces.push(element)
+            s_last_open.push(element)
+
+        elif element == "{": 
+            s_curly.push(element)
+            s_last_open.push(element)
+
+
+        elif element == ")":
+            if s_last_open.peek() != "(": return False
+            s_last_open.pop()
+            s_paren.pop()
+        
+        elif element == "]":
+            if s_last_open.peek() != "[": return False
+            s_last_open.pop()
+            s_braces.pop()
+            
+        elif element == "}":
+            if s_last_open.peek() != "{": return False
+            s_last_open.pop()
+            s_curly.pop()
+
+    # print("s_paren:" + s_curly.print())
+
+
+    if s_paren.is_empty() and s_braces.is_empty() and s_curly.is_empty():
+        return True
+    else:
+        return False
 
 def main():
     print("matcher: ", matcher("[()]"))

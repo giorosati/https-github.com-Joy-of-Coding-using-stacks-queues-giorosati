@@ -44,9 +44,6 @@ def matcher(str):
             s_last_open.pop()
             s_curly.pop()
 
-    # print("s_paren:" + s_curly.print())
-
-
     if s_paren.is_empty() and s_braces.is_empty() and s_curly.is_empty():
         return True
     else:

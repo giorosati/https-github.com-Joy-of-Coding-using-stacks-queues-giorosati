@@ -13,7 +13,16 @@ from Stack import Stack
 # Hint: can use a stack to help
 def reverse(q_orig):
     q_new = Queue([])
-    # FIXME
+    s_temp = Stack([])
+
+    while not q_orig.is_empty():
+        # print("executing deq")
+        s_temp.push(q_orig.deq())
+    
+    while not s_temp.is_empty():
+        # print("executing enq")
+        q_new.enq(s_temp.pop())
+
     return q_new
 
 def main():

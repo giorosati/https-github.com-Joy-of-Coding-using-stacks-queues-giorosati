@@ -22,16 +22,42 @@ from Queue import Queue
 
 def generate_binary_numbers(N):
     numbers = Queue([])
-    temp = Queue([])
+    temp_queue = Queue([])
 
     if N < 1: return numbers
 
-    temp.enq(1)
+    temp_queue.enq("1")
+    string1 = ""
+
+    count = 0
 
     for i in range(N):
+        # while not temp_queue.is_empty():
+        #     string1 = temp_queue.deq() + string1
+        temp_char = temp_queue.deq()
+        if temp_char == "0":     # when least sig. bit is zero, replace it with a 1
+            temp_queue.enq("1")
+        else:
+            temp_queue.deq()       #remove last "1"
+            count += 1
+            size = temp_queue.size()    # get size of temp_queue
+            for i in range(-1, -size, -1):   #iterate backwards from end of queue
+                # find the first occurrance of a zero, iterating backwards
+                temp_digit = temp_queue.deq()   # get next digit
+                count += 1
+                if temp_digit == "0": 
+                    temp_queue.enq("1")   # zero found, change to 1
+                    for i in range(0, count-1, 1):    # add zeros after
+                        temp_queue.enq("0")
 
 
-        numbers.enq(temp.deq)
+
+        # create string to numbers queue
+        while not temp_queue.is_empty():
+            string1 = temp_queue.deq() + string1
+
+        # add string to numbers queue
+        numbers.enq(string1)
 
 
     

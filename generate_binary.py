@@ -18,41 +18,56 @@ from Queue import Queue
 # 3) Now run a loop for generating and creating a queue of n binary numbers. 
 # ......a) Dequeue the front of the temp queue & add it to the output queue (to be returned). 
 # ......b) Append "0" at the end of the dequeued front item and enqueue it to the temp queue. 
-# ......c) Append "1" at the end of the dequeued front item and enqueue it to the temp queue.Algorithm adapted from https://www.geeksforgeeks.org/interesting-method-generate-binary-numbers-1-n/
+# ......c) Append "1" at the end of the dequeued front item and enqueue it to the temp queue.
+# Algorithm adapted from https://www.geeksforgeeks.org/interesting-method-generate-binary-numbers-1-n/
 
 def generate_binary_numbers(N):
-    numbers = Queue([])
-    temp = Stack([])
+    numbers = Queue([])  # final queue to be returned
+    temp = Queue([])     # temp queue to build strings representing each binary number
 
-    if N < 1: return numbers
+    if N < 1: return numbers    # returns empty queue if argument is less than one
 
-    temp.push(1)
-
-    for i in range(N):
-        temp_string = str(temp.pop())
-        numbers.enq(temp_string)
-        for j in range (-1, -len(temp_string), -1):
-            if temp_string[j] == "0":     # 
-                temp_string[j]=("1")
-                break
-            elif:
-                if j == len(temp_string):
-                    
-            count += 1
+    temp.enq("1")    # start the queue with a one
     
 
-
-
-        # create string to numbers queue
-        while not temp_queue.is_empty():
-            string1 = temp_queue.deq() + string1
-
-        # add string to numbers queue
-        numbers.enq(string1)
-
-
+    for i in range(1, N, 1):
     
-    return numbers
+        temp_string = temp.deq()   # get top element from the temp queue
+        numbers.enq(temp_string)   # add to output queue
+        
+        if temp_string[-1] == "1":
+            temp_string = temp_string + "0"
+            temp.enq(temp_string)
+
+        elif temp_string[-1] == "0":
+            temp_string = temp_string + "1"
+            temp.enq(temp_string)
+
+
+        # temp.enq(temp1_string)
+
+
+
+
+        
+        # numbers.enq(temp_string)
+        # for j in range (-1, -len(temp_string), -1):
+        #     if temp_string[j] == "0":     # 
+        #         temp_string[j]=("1")
+        #         break
+
+        #     temp.enq("0")  # if a 0 was not found, add a  0 to the queue
+
+        #     if -j == len(temp_string):   #iteration has reached the beginning of the string
+        #         while not temp.is_empty():
+        #             temp_string = temp_string + temp.deq()
+
+            
+        #     # add string to numbers queue            
+        # numbers.enq(temp_string)
+            
+    
+    return numbers  # return the queue
 
 def main():
     generate_binary_numbers(2).print()

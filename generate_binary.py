@@ -27,52 +27,44 @@ def generate_binary_numbers(N):
 
     if N < 1: return numbers    # returns empty queue if argument is less than one
 
-    temp.enq("1")    # start the queue with a one
-    
+    temp_string = "1"    # start the queue with a one
+    temp.enq(temp_string)
 
-    for i in range(1, N, 1):
-    
-        temp_string = temp.deq()   # get top element from the temp queue
+    for i in range(1, N+1, 1):
         numbers.enq(temp_string)   # add to output queue
+        temp_string = temp.deq()   # get top element from the temp queue
         
-        if temp_string[-1] == "1":
-            temp_string = temp_string + "0"
-            temp.enq(temp_string)
-
-        elif temp_string[-1] == "0":
-            temp_string = temp_string + "1"
-            temp.enq(temp_string)
-
-
-        # temp.enq(temp1_string)
-
-
-
-
+        if temp_string[-1] == "0":  # if last digit is a zero, change to a one
+            temp_string = temp_string[:-1] + "1"
+            # temp.enq(temp_string)
         
-        # numbers.enq(temp_string)
-        # for j in range (-1, -len(temp_string), -1):
-        #     if temp_string[j] == "0":     # 
-        #         temp_string[j]=("1")
-        #         break
-
-        #     temp.enq("0")  # if a 0 was not found, add a  0 to the queue
-
-        #     if -j == len(temp_string):   #iteration has reached the beginning of the string
-        #         while not temp.is_empty():
-        #             temp_string = temp_string + temp.deq()
-
+        elif len(temp_string) == 1:
+                temp_string = "10"
+        
+        elif temp_string[-1] == "1":
+            # need to find first prior zero. If all priors are 1, make string 1 + 0's
+            zero_string = ""
             
-        #     # add string to numbers queue            
-        # numbers.enq(temp_string)
-            
-    
+            for j in range (0, len(temp_string), 1):
+                if (temp_string[-(j+1)] == "1"):    # check if a this position is "1"
+                    if j < len(temp_string):
+                        zero_string = zero_string + "0" # add a zero for every "1" found
+                        if j+1 == len(temp_string):
+                            temp_string = temp_string = temp_string[:(-(j+1))] + "1" + zero_string
+                    
+                else:
+                    temp_string = temp_string[:(-(j+1))] + "1" + zero_string 
+                    break
+
+        temp.enq(temp_string)    
+
     return numbers  # return the queue
 
 def main():
     generate_binary_numbers(2).print()
     generate_binary_numbers(3).print()
     generate_binary_numbers(6).print()
+    # generate_binary_numbers(10).print()
 
 
 # Don't run main on import
